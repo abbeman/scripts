@@ -1,0 +1,24 @@
+#!/bin/bash
+
+usage() { echo "$(basename $0) usage:" && sed -ne "s/^[ \t]*\(.\)[ |\*]*) # \(.*\)$/\t-\1 - \2/p" $0; exit 0; }
+
+[ $# -eq 0 ] && usage
+searchtype="";
+while getopts ":hsgdctefia0123456789" arg; do
+  case $arg in
+    s) # Search for symbol.
+      searchtype="0";
+      shift;
+      ;;
+    g) # Search for definition.
+      searchtype="1";
+      shift;
+      ;;
+    h | *) # Display help.
+      usage
+      exit 0
+      ;;
+  esac
+done
+
+cscope -dL -${searchtype}$*

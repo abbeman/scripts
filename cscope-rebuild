@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo -n "Rebuilding cscope.files...";
+find \
+  \( -name unittest -prune \) -o \
+  \( \( -regextype posix-extended -iregex '.*\.(c|cpp|cc|C|c++|cxx|h|hpp|h++|hh|H|hxx)' -a ! -name '*.dpp.*' \) -print \) \
+  > cscope.files;
+echo "done.";
+
+echo -n "Rebuilding index...";
+cscope -bkq;
+echo "done.";

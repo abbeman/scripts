@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for server in $(vim -X --serverlist); do
+  echo "\e[1m$server:\e[0m";
+  old_IFS="$IFS";
+  export IFS='
+';
+  for name in $(vim -X --servername "$server" --remote-expr "map(getbufinfo({'bufloaded':1}), 'v:val[\"name\"]')"); do
+    echo "\t${name}";
+  done
+  export IFS="$old_IFS";
+done

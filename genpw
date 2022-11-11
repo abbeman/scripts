@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+import secrets
+
+allowed_chars = [chr(x) for x in range(ord('A'), ord('Z')+1)]
+allowed_chars.extend([chr(x) for x in range(ord('a'), ord('z')+1)])
+allowed_chars.extend([x for x in "-_,."])
+
+pw = ""
+for i in range(14):
+    pw += secrets.choice(allowed_chars)
+
+print("Password: '{}'".format(pw))
